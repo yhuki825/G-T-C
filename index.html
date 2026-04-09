@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G・T・C | ITインフラコンサルティング &amp; 日本酒販売</title>
+  <meta name="description" content="G・T・Cは、ITインフラコンサルティングと厳選日本酒販売を手がける個人事業です。埼玉県戸田市を拠点に、企業の成長を技術と文化の両面から支援します。">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================
+       CSS Variables & Reset
+    =========================== */
+    :root {
+      --color-dark:       #0a0f1e;
+      --color-dark-mid:   #111827;
+      --color-navy:       #1e293b;
+      --color-blue:       #2563eb;
+      --color-blue-light: #38bdf8;
+      --color-amber:      #b45309;
+      --color-amber-light:#d97706;
+      --color-cream:      #fdf8f0;
+      --color-slate-50:   #f8fafc;
+      --color-slate-100:  #f1f5f9;
+      --color-slate-200:  #e2e8f0;
+      --color-slate-400:  #94a3b8;
+      --color-slate-500:  #64748b;
+      --color-slate-600:  #475569;
+      --color-slate-900:  #0f172a;
+      --font-sans:  'Noto Sans JP', sans-serif;
+      --font-serif: 'Shippori Mincho B1', serif;
+      --transition: 0.3s ease;
+      --radius-lg: 1.5rem;
+      --radius-md: 0.75rem;
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-slate-50);
+      color: var(--color-slate-900);
+      overflow-x: hidden;
+      line-height: 1.8;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===========================
+       Utility
+    =========================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-label--blue  { color: var(--color-blue); }
+    .section-label--amber { color: var(--color-amber); }
+    .section-label--light { color: var(--color-blue-light); }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title--light { color: #fff; }
+
+    .divider {
+      width: 3rem;
+      height: 2px;
+      background: var(--color-blue);
+      margin: 1.5rem 0;
+    }
+
+    .divider--amber { background: var(--color-amber); }
+    .divider--center { margin-left: auto; margin-right: auto; }
+
+    /* ===========================
+       Header / Navigation
+    =========================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-slate-100);
+      transition: box-shadow var(--transition);
+    }
+
+    .header.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .header__logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-slate-900);
+    }
+
+    .header__logo span {
+      color: var(--color-blue);
+    }
+
+    .nav__list {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav__link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-slate-600);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--color-blue);
+      transition: width var(--transition);
+    }
+
+    .nav__link:hover {
+      color: var(--color-blue);
+    }
+
+    .nav__link:hover::after {
+      width: 100%;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--color-slate-900);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-slate-100);
+      z-index: 99;
+      padding: 1.5rem 2rem;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .mobile-nav.open {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-nav__link {
+      display: block;
+      padding: 1rem 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-slate-600);
+      border-bottom: 1px solid var(--color-slate-100);
+      transition: color var(--transition);
+    }
+
+    .mobile-nav__link:hover {
+      color: var(--color-blue);
+    }
+
+    /* ===========================
+       Hero
+    =========================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-dark) 0%, #0d1f3c 50%, #1a0a2e 100%);
+      color: #fff;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.12;
+    }
+
+    /* Decorative grid overlay */
+    .hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glowing orbs */
+    .hero__orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero__orb--blue {
+      width: 500px;
+      height: 500px;
+      background: rgba(37, 99, 235, 0.25);
+      top: -100px;
+      right: -100px;
+    }
+
+    .hero__orb--amber {
+      width: 350px;
+      height: 350px;
+      background: rgba(180, 83, 9, 0.2);
+      bottom: -50px;
+      left: -50px;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 4rem 2rem;
+      max-width: 900px;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-blue-light);
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.3;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__title .accent-blue  { color: var(--color-blue-light); }
+    .hero__title .accent-amber { color: #f59e0b; }
+
+    .hero__subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .hero__cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn--blue {
+      background: var(--color-blue);
+      color: #fff;
+    }
+
+    .btn--blue:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn--amber {
+      background: var(--color-amber);
+      color: #fff;
+    }
+
+    .btn--amber:hover {
+      background: #92400e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(180, 83, 9, 0.4);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+
+    .btn--outline:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-2px);
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .hero__scroll svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===========================
+       About Section
+    =========================== */
+    .about {
+      padding: 7rem 0;
+      background: #fff;
+    }
+
+    .about__inner {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about__text {
+      color: var(--color-slate-600);
+      font-size: 1rem;
+      line-height: 2;
+    }
+
+    /* Two-pillar cards */
+    .about__pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .pillar-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card--blue {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border: 1px solid #bfdbfe;
+    }
+
+    .pillar-card--amber {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1px solid #fde68a;
+    }
+
+    .pillar-card__icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card__title--blue  { color: var(--color-blue); }
+    .pillar-card__title--amber { color: var(--color-amber); }
+
+    .pillar-card__text {
+      font-size: 0.85rem;
+      color: var(--color-slate-600);
+      line-height: 1.8;
+    }
+
+    /* ===========================
+       Services Section (shared)
+    =========================== */
+    .service-section {
+      padding: 7rem 0;
+      overflow: hidden;
+    }
+
+    .service-section--light { background: var(--color-slate-50); }
+    .service-section--cream { background: var(--color-cream); }
+
+    .service-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .service-layout--reverse { direction: rtl; }
+    .service-layout--reverse > * { direction: ltr; }
+
+    /* Image side */
+    .service-image {
+      position: relative;
+    }
+
+    .service-image__frame {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .service-image__frame img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .service-image__frame:hover img {
+      transform: scale(1.04);
+    }
+
+    .service-image__deco {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      top: 1.5rem;
+      z-index: -1;
+    }
+
+    .service-image__deco--blue {
+      left: -1.5rem;
+      border: 2px solid #bfdbfe;
+    }
+
+    .service-image__deco--amber {
+      right: -1.5rem;
+      border: 2px solid #fde68a;
+    }
+
+    /* Text side */
+    .service-text {}
+
+    .service-text__body {
+      color: var(--color-slate-600);
+      font-size: 0.95rem;
+      line-height: 2;
+      margin-bottom: 2rem;
+    }
+
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-item__icon {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .feature-item__icon--blue {
+      background: #dbeafe;
+      color: var(--color-blue);
+    }
+
+    .feature-item__icon--amber {
+      background: #fef3c7;
+      color: var(--color-amber);
+    }
+
+    .feature-item__title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .feature-item__desc {
+      font-size: 0.8rem;
+      color: var(--color-slate-500);
+      line-height: 1.7;
+    }
+
+    /* Grid cards for sake */
+    .sake-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .sake-card {
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(8px);
+    }
+
+    .sake-card__title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 0.5rem;
+    }
+
+    .sake-card__text {
+      font-size: 0.78rem;
+      color: var(--color-slate-500);
+      line-height: 1.7;
+    }
+
+    /* ===========================
+       Strengths Section
+    =========================== */
+    .strengths {
+      padding: 7rem 0;
+      background: var(--color-dark);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strengths__bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .strengths__bg-orb--1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(37, 99, 235, 0.15);
+      top: -100px;
+      left: -100px;
+    }
+
+    .strengths__bg-orb--2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(180, 83, 9, 0.15);
+      bottom: -50px;
+      right: -50px;
+    }
+
+    .strengths__header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .strengths__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .strength-card {
+      padding: 2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .strength-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .strength-card__number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      color: rgba(255,255,255,0.08);
+      margin-bottom: 0.5rem;
+    }
+
+    .strength-card__title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .strength-card__text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+
+    /* ===========================
+       Profile Section
+    =========================== */
+    .profile {
+      padding: 7rem 0;
+      background: #fff;
+    }
+
+    .profile__card {
+      background: var(--color-slate-900);
+      color: #fff;
+      border-radius: 2rem;
+      padding: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile__card-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .profile__card-orb--1 {
+      width: 350px;
+      height: 350px;
+      background: rgba(37, 99, 235, 0.15);
+      top: -100px;
+      right: -100px;
+    }
+
+    .profile__card-orb--2 {
+      width: 250px;
+      height: 250px;
+      background: rgba(180, 83, 9, 0.1);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .profile__inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .profile__name {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile__name-en {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-blue-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .profile__bio {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 2;
+      max-width: 560px;
+    }
+
+    .profile__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .profile__tag {
+      padding: 0.35rem 0.9rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+    }
+
+    .profile__expertise {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 220px;
+    }
+
+    .expertise-card {
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+    }
+
+    .expertise-card__label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .expertise-card__value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ===========================
+       Info / Company Section
+    =========================== */
+    .info {
+      padding: 7rem 0;
+      background: var(--color-slate-50);
+    }
+
+    .info__header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .info__table {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-slate-200);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+
+    .info__row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      border-bottom: 1px solid var(--color-slate-100);
+    }
+
+    .info__row:last-child {
+      border-bottom: none;
+    }
+
+    .info__label {
+      padding: 1.5rem 2rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-slate-400);
+      background: var(--color-slate-50);
+      display: flex;
+      align-items: center;
+    }
+
+    .info__value {
+      padding: 1.5rem 2rem;
+      font-size: 0.9rem;
+      color: var(--color-slate-700, #334155);
+      display: flex;
+      align-items: center;
+      line-height: 1.8;
+    }
+
+    /* ===========================
+       Footer
+    =========================== */
+    .footer {
+      background: var(--color-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 3.5rem 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer__logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .footer__nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer__nav a {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      transition: color var(--transition);
+    }
+
+    .footer__nav a:hover {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ===========================
+       Responsive
+    =========================== */
+    @media (max-width: 1024px) {
+      .service-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .service-layout--reverse {
+        direction: ltr;
+      }
+
+      .strengths__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .profile__inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .profile__expertise {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .expertise-card {
+        flex: 1;
+        min-width: 180px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hamburger { display: flex; }
+
+      .about__pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .strengths__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sake-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info__row {
+        grid-template-columns: 1fr;
+      }
+
+      .info__label {
+        padding-bottom: 0.5rem;
+        border-bottom: none;
+      }
+
+      .info__value {
+        padding-top: 0.5rem;
+      }
+
+      .profile__card {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer__nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero__title {
+        font-size: 2.4rem;
+      }
+
+      .container {
+        padding: 0 1.25rem;
+      }
+    }
+
+    /* ===========================
+       Scroll-in animation
+    =========================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== Header ==================== -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="#" class="header__logo">G<span>・</span>T<span>・</span>C</a>
+
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="#about"    class="nav__link">About</a></li>
+            <li><a href="#services" class="nav__link">Services</a></li>
+            <li><a href="#profile"  class="nav__link">Profile</a></li>
+            <li><a href="#info"     class="nav__link">Company</a></li>
+          </ul>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav__list">
+      <li><a href="#about"    class="mobile-nav__link">About</a></li>
+      <li><a href="#services" class="mobile-nav__link">Services</a></li>
+      <li><a href="#profile"  class="mobile-nav__link">Profile</a></li>
+      <li><a href="#info"     class="mobile-nav__link">Company</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==================== Hero ==================== -->
+  <section class="hero" id="top">
+    <div class="hero__bg">
+      <img
+        src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000"
+        alt="サーバーラックとデジタルネットワーク"
+        loading="eager"
+      >
+    </div>
+    <div class="hero__grid"></div>
+    <div class="hero__orb hero__orb--blue"></div>
+    <div class="hero__orb hero__orb--amber"></div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow">IT Infrastructure &amp; Sake Selection</p>
+      <h1 class="hero__title">
+        技術を繋ぎ、<br>
+        伝統を醸す。
+      </h1>
+      <p class="hero__subtitle">
+        ITインフラの最適化による事業加速と、<br>
+        日本の伝統文化である日本酒を通じた豊かな時間の提供。
+      </p>
+      <div class="hero__cta">
+        <a href="#it-services"   class="btn btn--blue">IT Consulting</a>
+        <a href="#sake-services" class="btn btn--amber">Sake Selection</a>
+        <a href="#about"         class="btn btn--outline">About G・T・C</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ==================== About ==================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__inner fade-up">
+        <span class="section-label section-label--blue">About G・T・C</span>
+        <h2 class="section-title">ビジネスの根幹を支える。</h2>
+        <div class="divider divider--center"></div>
+        <p class="about__text">
+          G・T・Cは、目に見えないが欠かすことのできない「土台」を整える事業を展開しています。
+          一つは、現代社会の血液である「ITインフラ」。企業の成長を止めない堅牢で柔軟なシステム環境を構築します。
+          もう一つは、日本が誇る伝統の結晶「日本酒」。造り手の想いを消費者に届ける流通の礎を担います。
+          異なる二つの分野において、プロフェッショナルな視点で価値を創造します。
+        </p>
+
+        <div class="about__pillars">
+          <div class="pillar-card pillar-card--blue fade-up fade-up-delay-1">
+            <div class="pillar-card__icon">🖥️</div>
+            <h3 class="pillar-card__title pillar-card__title--blue">IT Infrastructure</h3>
+            <p class="pillar-card__text">
+              クラウド移行からネットワーク設計、セキュリティ強化まで。
+              企業の成長フェーズに合わせた最適なITインフラをワンストップで提供します。
+            </p>
+          </div>
+          <div class="pillar-card pillar-card--amber fade-up fade-up-delay-2">
+            <div class="pillar-card__icon">🍶</div>
+            <h3 class="pillar-card__title pillar-card__title--amber">Sake Selection</h3>
+            <p class="pillar-card__text">
+              日本各地の風土が育んだ厳選銘柄を、最高の状態でお届け。
+              販売からペアリング提案まで、日本酒を通じた豊かな体験をサポートします。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== IT Services ==================== -->
+  <section class="service-section service-section--light" id="it-services">
+    <div class="container" id="services">
+      <div class="service-layout">
+
+        <!-- Image -->
+        <div class="service-image fade-up">
+          <div class="service-image__frame">
+            <img
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000"
+              alt="ITインフラ・ネットワークの抽象的なイメージ"
+              loading="lazy"
+            >
+          </div>
+          <div class="service-image__deco service-image__deco--blue"></div>
+        </div>
+
+        <!-- Text -->
+        <div class="service-text fade-up fade-up-delay-1">
+          <span class="section-label section-label--blue">IT Infrastructure</span>
+          <h2 class="section-title">
+            加速するビジネスに応えるインフラデザイン。
+          </h2>
+          <div class="divider"></div>
+          <p class="service-text__body">
+            クラウド移行、ネットワーク構築、セキュリティ強化。
+            企業の成長フェーズに合わせた最適なITインフラをコンサルティングします。
+            現場の課題に寄り添い、運用コストの削減と生産性の向上を実現します。
+          </p>
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-item__icon feature-item__icon--blue">✓</span>
+              <div>
+                <h4 class="feature-item__title">ネットワーク設計・構築</h4>
+                <p class="feature-item__desc">安定稼働と拡張性を両立したオフィス・データセンター構築。要件定義から運用保守まで一貫してサポートします。</p>
+              </div>
+            </li>
+            <li class="feature-item">
+              <span class="feature-item__icon feature-item__icon--blue">✓</span>
+              <div>
+                <h4 class="feature-item__title">セキュリティコンサルティング</h4>
+                <p class="feature-item__desc">ゼロトラストに基づいた安全なリモートワーク環境の提供。脆弱性診断から対策立案まで対応します。</p>
+              </div>
+            </li>
+            <li class="feature-item">
+              <span class="feature-item__icon feature-item__icon--blue">✓</span>
+              <div>
+                <h4 class="feature-item__title">クラウド移行支援</h4>
+                <p class="feature-item__desc">AWS・Azure・GCPへの最適な移行計画を策定。コスト最適化とパフォーマンス向上を両立します。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Sake Services ==================== -->
+  <section class="service-section service-section--cream" id="sake-services">
+    <div class="container">
+      <div class="service-layout service-layout--reverse">
+
+        <!-- Image -->
+        <div class="service-image fade-up">
+          <div class="service-image__frame">
+            <img
+              src="GTC.jpg"
+              alt="注がれる日本酒と徳利のイメージ"
+              loading="lazy"
+            >
+          </div>
+          <div class="service-image__deco service-image__deco--amber"></div>
+        </div>
+
+        <!-- Text -->
+        <div class="service-text fade-up fade-up-delay-1">
+          <span class="section-label section-label--amber">Sake Selection</span>
+          <h2 class="section-title">
+            酒蔵の情熱を、<br>最適な形で届ける。
+          </h2>
+          <div class="divider divider--amber"></div>
+          <p class="service-text__body">
+            日本各地の風土が育んだ日本酒。
+            私たちは、選りすぐりの銘柄を、最高の状態でお届けします。
+            販売からペアリングのご提案まで、日本酒を通じた豊かな体験をサポートします。
+          </p>
+          <div class="sake-grid">
+            <div class="sake-card">
+              <h4 class="sake-card__title">厳選された銘柄</h4>
+              <p class="sake-card__text">希少な銘柄から次世代の注目株まで幅広く取り扱い。産地・蔵元の背景まで丁寧にご紹介します。</p>
+            </div>
+            <div class="sake-card">
+              <h4 class="sake-card__title">徹底した品質管理</h4>
+              <p class="sake-card__text">温度と光を厳密に管理し、酒本来の味を守ります。受け取った瞬間から最高の一杯を。</p>
+            </div>
+            <div class="sake-card">
+              <h4 class="sake-card__title">ペアリング提案</h4>
+              <p class="sake-card__text">料理との相性を踏まえた最適な銘柄をご提案。食卓をより豊かに彩ります。</p>
+            </div>
+            <div class="sake-card">
+              <h4 class="sake-card__title">法人・卸対応</h4>
+              <p class="sake-card__text">飲食店・小売店への卸販売にも対応。仕入れのご相談はお気軽にどうぞ。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Strengths ==================== -->
+  <section class="strengths">
+    <div class="strengths__bg-orb strengths__bg-orb--1"></div>
+    <div class="strengths__bg-orb strengths__bg-orb--2"></div>
+    <div class="container">
+      <div class="strengths__header fade-up">
+        <span class="section-label section-label--light">Why G・T・C</span>
+        <h2 class="section-title section-title--light">G・T・Cが選ばれる理由。</h2>
+        <div class="divider divider--center"></div>
+      </div>
+      <div class="strengths__grid">
+        <div class="strength-card fade-up fade-up-delay-1">
+          <div class="strength-card__number">01</div>
+          <h3 class="strength-card__title">現場経験に裏打ちされた提案力</h3>
+          <p class="strength-card__text">大手企業からスタートアップまで、多様な現場でのITインフラ構築経験をもとに、実践的かつ費用対効果の高い提案を行います。</p>
+        </div>
+        <div class="strength-card fade-up fade-up-delay-2">
+          <div class="strength-card__number">02</div>
+          <h3 class="strength-card__title">二分野を横断するハイブリッド視点</h3>
+          <p class="strength-card__text">ITの論理的思考と日本酒の感性的な視点を融合。どちらの分野においても、表面的ではない本質的な価値を提供します。</p>
+        </div>
+        <div class="strength-card fade-up fade-up-delay-3">
+          <div class="strength-card__number">03</div>
+          <h3 class="strength-card__title">個人事業ならではのフットワーク</h3>
+          <p class="strength-card__text">意思決定が速く、小回りが利くのが個人事業の強み。お客様の状況変化に柔軟かつ迅速に対応します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Profile ==================== -->
+  <section class="profile" id="profile">
+    <div class="container">
+      <div class="profile__card fade-up">
+        <div class="profile__card-orb profile__card-orb--1"></div>
+        <div class="profile__card-orb profile__card-orb--2"></div>
+        <div class="profile__inner">
+          <div>
+            <span class="section-label section-label--light">Representative</span>
+            <h2 class="profile__name">後藤 拓也</h2>
+            <p class="profile__name-en">Takuya Goto</p>
+            <p class="profile__bio">
+              長年、大手企業やスタートアップのITインフラ構築に従事。
+              テクノロジーがビジネスに与えるインパクトを現場で体感する傍ら、
+              幼少期より親しんできた日本の食文化、特に日本酒の多様性に魅了される。
+              エンジニアリングの論理的な視点と日本酒の感性的な視点を併せ持つ、
+              ハイブリッドな事業展開を目指し「G・T・C」を設立。
+            </p>
+            <div class="profile__tags">
+              <span class="profile__tag">IT Infrastructure</span>
+              <span class="profile__tag">Network Design</span>
+              <span class="profile__tag">Cloud Migration</span>
+              <span class="profile__tag">Zero Trust Security</span>
+              <span class="profile__tag">Sake Sommelier</span>
+              <span class="profile__tag">Sake Sales</span>
+            </div>
+          </div>
+          <div class="profile__expertise">
+            <div class="expertise-card">
+              <p class="expertise-card__label">Expertise</p>
+              <p class="expertise-card__value">IT Infrastructure Arch.</p>
+            </div>
+            <div class="expertise-card">
+              <p class="expertise-card__label">Expertise</p>
+              <p class="expertise-card__value">Sake Sommelier / Sales</p>
+            </div>
+            <div class="expertise-card">
+              <p class="expertise-card__label">Base</p>
+              <p class="expertise-card__value">Toda, Saitama</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Company Info ==================== -->
+  <section class="info" id="info">
+    <div class="container">
+      <div class="info__header fade-up">
+        <span class="section-label section-label--blue">Company</span>
+        <h2 class="section-title">事業概要</h2>
+        <div class="divider divider--center"></div>
+      </div>
+      <div class="info__table fade-up">
+        <div class="info__row">
+          <dt class="info__label">屋号</dt>
+          <dd class="info__value">G・T・C</dd>
+        </div>
+        <div class="info__row">
+          <dt class="info__label">代表者</dt>
+          <dd class="info__value">後藤 拓也</dd>
+        </div>
+        <div class="info__row">
+          <dt class="info__label">事業内容</dt>
+          <dd class="info__value">
+            ITインフラストラクチャ・コンサルティング／
+            ネットワーク・セキュリティ設計・運用支援／
+            日本酒の卸・小売・プロモーション
+          </dd>
+        </div>
+        <div class="info__row">
+          <dt class="info__label">所在地</dt>
+          <dd class="info__value">〒335-0023 埼玉県戸田市本町 2-16-17</dd>
+        </div>
+        <div class="info__row">
+          <dt class="info__label">対応エリア</dt>
+          <dd class="info__value">首都圏を中心に全国対応（リモート可）</dd>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Footer ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">G・T・C</div>
+        <ul class="footer__nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#profile">Profile</a></li>
+          <li><a href="#info">Company</a></li>
+        </ul>
+        <p class="footer__copy">&copy; 2025 G・T・C. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JavaScript ==================== -->
+  <script>
+    // Header scroll shadow
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Hamburger menu
+    const hamburger  = document.getElementById('hamburger');
+    const mobileNav  = document.getElementById('mobileNav');
+    const mobileLinks = mobileNav.querySelectorAll('.mobile-nav__link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-label', 'メニューを開く');
+      });
+    });
+
+    // Scroll-in animation
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
